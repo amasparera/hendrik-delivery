@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
 
+import '../widget/detail_order_aktif.dart';
+import '../widget/pop_up_pesanan.dart';
+
 class HomeController extends ChangeNotifier {
   bool orderMasuk = false;
   bool online = false;
 
-  void swithOnline(bool value) {
+  void swithOnline(bool value, BuildContext context) async {
     online = value;
-    notifyListeners();
-  }
+    if (value) {
+      final result = await showModalBottomSheet<bool>(
+        context: context,
+        elevation: 2,
+        clipBehavior: Clip.hardEdge,
+        // backgroundColor: Color(0xffF5F5F5),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+        ),
+        builder: (context) => const PopUpPesanan(),
+      );
 
-  Future<void> pesananMasuk() async {
-    await Future.delayed(Duration(seconds: 2));
-
-    orderMasuk = true;
+      if (result != null && result) {
+        showBottomSheet(
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) => const DetailOrderAktif());
+      }
+      ;
+    }
     notifyListeners();
   }
 
