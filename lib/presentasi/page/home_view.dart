@@ -121,22 +121,25 @@ class _HomeViewState extends State<HomeView> {
                     color: Color(0xffA9A9A9)),
               ),
             ),
-            Center(
-              child: Consumer<HomeController>(builder: (context, c, _) {
-                return AnimatedSwitcher(
-                  duration: const Duration(seconds: 3),
-                  switchInCurve: Curves.bounceIn,
-                  child: c.online
-                      ? Image.asset(
-                          "assets/image/Wavy Buddies Order Shipped.png",
-                          scale: 4,
-                        )
-                      : Image.asset(
-                          "assets/image/Wavy Buddies Track Your Package.png",
-                          scale: 4,
-                        ),
-                );
-              }),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Center(
+                child: Consumer<HomeController>(builder: (context, c, _) {
+                  return AnimatedSwitcher(
+                    duration: const Duration(seconds: 3),
+                    switchInCurve: Curves.bounceIn,
+                    child: c.online
+                        ? Image.asset(
+                            "assets/image/Wavy Buddies Order Shipped.png",
+                            scale: 4.1,
+                          )
+                        : Image.asset(
+                            "assets/image/Wavy Buddies Track Your Package.png",
+                            scale: 4.1,
+                          ),
+                  );
+                }),
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * .42,
@@ -165,7 +168,8 @@ class _HomeViewState extends State<HomeView> {
                         indicatorSize: TabBarIndicatorSize.label,
                         unselectedLabelColor: Color(0xffBDBDBD),
                         // labelPadding: EdgeInsets.zero,
-                        indicatorPadding: EdgeInsets.all(0), indicatorWeight: 0,
+                        indicatorPadding: EdgeInsets.all(0),
+                        indicatorWeight: 0,
                         labelStyle: TextStyle(
                             color: fontBlack,
                             fontSize: 13,
@@ -229,7 +233,8 @@ class _HomeViewState extends State<HomeView> {
                               Builder(builder: (context) {
                                 return CardOrder(
                                   onTap: () {
-                                    showBottomSheet(
+                                    showModalBottomSheet(
+                                        isScrollControlled: true,
                                         backgroundColor: Colors.transparent,
                                         context: context,
                                         builder: (cb) =>

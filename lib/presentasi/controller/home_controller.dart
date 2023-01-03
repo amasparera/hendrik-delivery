@@ -9,6 +9,7 @@ class HomeController extends ChangeNotifier {
 
   void swithOnline(bool value, BuildContext context) async {
     online = value;
+    notifyListeners();
     if (value) {
       final result = await showModalBottomSheet<bool>(
         context: context,
@@ -23,14 +24,15 @@ class HomeController extends ChangeNotifier {
       );
 
       if (result != null && result) {
-        showBottomSheet(
+        showModalBottomSheet(
             backgroundColor: Colors.transparent,
+            isScrollControlled: true,
             context: context,
             builder: (context) => const DetailOrderAktif());
+
+        notifyListeners();
       }
-      ;
     }
-    notifyListeners();
   }
 
   show(BuildContext context) {

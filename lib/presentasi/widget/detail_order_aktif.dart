@@ -1,22 +1,59 @@
 import 'package:dotted_line/dotted_line.dart';
+import 'package:e_kantin_delivery/presentasi/widget/main_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/main_app.dart';
 import '../../dummi.dart';
+import 'list_harga.dart';
 
-class DetailOrderAktif extends StatelessWidget {
+class DetailOrderAktif extends StatefulWidget {
   const DetailOrderAktif({super.key});
 
   @override
+  State<DetailOrderAktif> createState() => _DetailOrderAktifState();
+}
+
+class _DetailOrderAktifState extends State<DetailOrderAktif> {
+  late DraggableScrollableController _draggableScrollableController;
+
+  @override
+  void initState() {
+    _draggableScrollableController = DraggableScrollableController();
+    _draggableScrollableController.addListener(() {
+      if (_draggableScrollableController.pixels < 341.00) {
+        setState(() {
+          open = true;
+        });
+      } else {
+        setState(() {
+          open = false;
+        });
+      }
+      print(_draggableScrollableController.pixels.toStringAsFixed(0));
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _draggableScrollableController.dispose();
+    super.dispose();
+  }
+
+  bool open = true;
+  @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-        minChildSize: .3,
-        maxChildSize: .97,
+        controller: _draggableScrollableController,
+        minChildSize: .36,
+        maxChildSize: .89,
         initialChildSize: .46,
+        // snap: true,
+        // expand: true,
         builder: (contex, controller) => Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                  color: open ? const Color(0xffF5F5F5) : Colors.white,
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
                       topRight: Radius.circular(12))),
               child: ListView(
@@ -24,6 +61,16 @@ class DetailOrderAktif extends StatelessWidget {
                     left: padding, right: padding, top: 12),
                 controller: controller,
                 children: [
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 12),
+                      width: padding,
+                      height: 4,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0xffbdbdbd)),
+                    ),
+                  ),
                   Row(
                     children: [
                       const CircleAvatar(
@@ -166,6 +213,116 @@ class DetailOrderAktif extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: padding),
+                  if (open)
+                    MainButton(
+                      symetry: 0,
+                      onPress: () {},
+                      text: "Antar Pesanan",
+                    ),
+                  if (open == false)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8),
+                          child: Divider(
+                            thickness: 2,
+                          ),
+                        ),
+                        const Text(
+                          "Pesanan",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                        const SizedBox(height: 10),
+                        const ListHarga(
+                          quantity: "1",
+                          text: "Nasi Rendang Daging",
+                        ),
+                        const ListHarga(
+                          quantity: "2",
+                          text: "Nasi Empati Hati",
+                        ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          "Detail pembayaran",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 13),
+                        ),
+                        const SizedBox(height: 10),
+                        const ListHarga(
+                          quantity: "Rp15.000",
+                          text: "Harga",
+                        ),
+                        const ListHarga(
+                          quantity: "Rp2.000",
+                          text: "Ongkir",
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: DottedLine(
+                            dashColor: Color(0xffEEEEEE),
+                          ),
+                        ),
+                        const ListHarga(
+                          quantity: "Rp20.000",
+                          text: "Total",
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: DottedLine(
+                            dashColor: Color(0xffEEEEEE),
+                          ),
+                        ),
+                        const ListHarga(
+                          quantity: "Rp20.000",
+                          text: "Bayar dengan tunai",
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: Divider(
+                            thickness: 2,
+                          ),
+                        ),
+                        const Text(
+                          "Catatan pembeli",
+                          style: TextStyle(
+                              color: Color(0xffF44336),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13),
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          "titip ke satpan PT. viscode.id ya mas",
+                          style: TextStyle(fontSize: 11),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: Center(
+                            child: Text(
+                              "No. Pesanan #12345",
+                              style: TextStyle(
+                                  color: Color(0xffBDBDBD), fontSize: 13),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: TextButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: const Color(0xffFFEBEE)),
+                              onPressed: () {},
+                              child: const Text(
+                                "Batalkan Pesanan",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                    color: Color(0xffF44336)),
+                              )),
+                        ),
+                        const SizedBox(height: padding),
+                      ],
+                    )
                 ],
               ),
             ));
