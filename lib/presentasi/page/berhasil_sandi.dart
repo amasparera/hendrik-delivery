@@ -1,7 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import '../../const/main_app.dart';
+import '../controller/login_controller.dart';
 import '../widget/main_button.dart';
 
 class BerhasilSandi extends StatelessWidget {
@@ -22,7 +25,7 @@ class BerhasilSandi extends StatelessWidget {
             ),
             FadeInDown(
                 duration: const Duration(milliseconds: 450),
-                child: Image.asset("assets/image/Hands Unlocked.png")),
+                child: Image.asset("assets/image/Switch_sukser.png")),
             FadeInDown(
               duration: const Duration(milliseconds: 450),
               child: const Padding(
@@ -33,9 +36,11 @@ class BerhasilSandi extends StatelessWidget {
                 ),
               ),
             ),
-            FadeInDown(
-                duration: const Duration(milliseconds: 450),
-                child: const Text("Password kamu berhasil diganti")),
+            Consumer<LoginController>(builder: (context, c, _) {
+              return FadeInDown(
+                  duration: const Duration(milliseconds: 450),
+                  child: Text(c.pesanView));
+            }),
             const SizedBox(
               height: padding * 2,
             ),
@@ -43,7 +48,9 @@ class BerhasilSandi extends StatelessWidget {
               duration: const Duration(milliseconds: 900),
               delay: const Duration(milliseconds: 450),
               child: MainButton(
-                onPress: () {},
+                onPress: () {
+                  context.read<LoginController>().masuk(context);
+                },
                 text: "Masuk",
                 symetry: 0,
               ),

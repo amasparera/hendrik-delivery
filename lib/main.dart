@@ -1,13 +1,16 @@
+import 'package:e_kantin_delivery/const/local_data.dart';
 import 'package:e_kantin_delivery/presentasi/controller/home_controller.dart';
 import 'package:e_kantin_delivery/presentasi/page/home_view.dart';
+import 'package:e_kantin_delivery/presentasi/page/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'const/main_app.dart';
-import 'presentasi/page/login_view.dart';
 import 'const/dev_injetsion.dart' as dev;
+import 'presentasi/controller/login_controller.dart';
+import 'presentasi/controller/profile_controller.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,27 +22,27 @@ void main(List<String> args) async {
         systemNavigationBarIconBrightness: Brightness.dark),
   );
   await dev.register();
-  runApp(const MyApp());
+  final home = await LocalData().loadToken();
+  runApp(MyApp(home: home));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key, this.home});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+  final String? home;
 
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => dev.locator<HomeController>())
+        ChangeNotifierProvider(create: (_) => dev.locator<HomeController>()),
+        ChangeNotifierProvider(create: (_) => dev.locator<LoginController>()),
+        ChangeNotifierProvider(create: (_) => dev.locator<ProfileController>())
       ],
       child: MaterialApp(
           title: "E-Kantin Delivery",
           debugShowCheckedModeBanner: false,
-          home: const HomeView(),
+          home: home != null ? const HomeView() : const LoginView(),
           theme: ThemeData.light().copyWith(
               primaryColor: purple,
               textTheme: GoogleFonts.interTextTheme(),

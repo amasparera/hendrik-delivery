@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import '../../const/main_app.dart';
 import '../../const/navigasi.dart';
-import '../widget/main_textfield.dart';
+import '../../const/request_datate.dart';
+import '../controller/login_controller.dart';
 import '../widget/main_button.dart';
-import 'verifikasi_password_view.dart';
+import '../widget/main_textfield.dart';
 
 class LupaPassword extends StatelessWidget {
   const LupaPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final co = context.read<LoginController>();
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
@@ -27,7 +31,7 @@ class LupaPassword extends StatelessWidget {
         children: [
           const SizedBox(height: 34),
           Image.asset(
-            "assets/image/Hands Tiny Lock.png",
+            "assets/image/Switch.png",
             height: 240,
           ),
           const SizedBox(height: padding),
@@ -39,20 +43,37 @@ class LupaPassword extends StatelessWidget {
           const Text(
               "Masukkan e-mail yang terdaftar. Kami akan mengirimkan kode verifikasi untuk kamu, atur ulang sandi"),
           const SizedBox(height: padding),
-          const MainTextField(
+          MainTextField(
+            controller: co.emailLupaPassword,
             hint: "Email atau nomor ponsel",
-            icon: Icon(
+            icon: const Icon(
               Icons.email_outlined,
               color: Color(0xffBDBDBD),
             ),
           ),
           const SizedBox(height: padding * 2),
-          MainButton(
-            onPress: () {
-              toPageCupertino(context, const VerifikasiPasswordView());
+          Consumer<LoginController>(
+            builder: (context, c, _) {
+              return MainButton(
+                onPress: () {
+                  c.reqLupaPassword == RequestState.empty
+                      ? c.lupaPassword(context)
+                      : null;
+                },
+                text: c.reqLupaPassword == RequestState.empty ? "Lanjut" : null,
+                symetry: 0,
+                child: c.reqLupaPassword == RequestState.loading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: bg,
+                          strokeWidth: 1.5,
+                        ),
+                      )
+                    : null,
+              );
             },
-            text: "Lanjut",
-            symetry: 0,
           ),
           const SizedBox(height: padding),
         ],

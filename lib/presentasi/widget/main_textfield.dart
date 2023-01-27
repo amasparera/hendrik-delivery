@@ -7,7 +7,8 @@ class MainTextField extends StatelessWidget {
       required this.icon,
       required this.hint,
       this.obscure = false,
-      this.visibiliti})
+      this.visibiliti,
+      this.onChange})
       : super(key: key);
 
   final TextEditingController? controller;
@@ -15,12 +16,14 @@ class MainTextField extends StatelessWidget {
   final String hint;
   final bool obscure;
   final Widget? visibiliti;
+  final ValueChanged? onChange;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       obscureText: obscure,
       controller: controller,
+      onChanged: onChange,
       decoration: InputDecoration(
         hintStyle: const TextStyle(color: Color(0xffBDBDBD)),
         prefixIcon: icon,

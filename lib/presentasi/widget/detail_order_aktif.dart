@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:e_kantin_delivery/presentasi/widget/main_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../const/main_app.dart';
@@ -29,7 +30,9 @@ class _DetailOrderAktifState extends State<DetailOrderAktif> {
           open = false;
         });
       }
-      print(_draggableScrollableController.pixels.toStringAsFixed(0));
+      if (kDebugMode) {
+        print(_draggableScrollableController.pixels.toStringAsFixed(0));
+      }
     });
     super.initState();
   }
