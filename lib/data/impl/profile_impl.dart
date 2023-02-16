@@ -59,7 +59,7 @@ class ProfileImpl implements ProfileRepository {
 
     req.headers.addAll({"Authorization": ApiApp.basicAuth});
     req.fields.addAll({
-      "customer": id ?? '',
+      "courier": id ?? '',
       "name": name,
       "address": address,
       "phone_number": phoneNumber,

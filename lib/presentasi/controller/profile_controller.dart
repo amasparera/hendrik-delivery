@@ -72,11 +72,12 @@ class ProfileController extends ChangeNotifier {
       notifyListeners();
     }, (r) {
       reqProfile = RequestState.empty;
+
       userModel = r;
       namaLengkap = TextEditingController(text: r.name);
-      alamat = TextEditingController(text: r.address);
+      alamat = TextEditingController();
       nomorTelpon = TextEditingController(text: r.phoneNumber);
-      LocalData().saveId(userModel!.customer);
+      LocalData().saveId(userModel!.courier!);
       notifyListeners();
     });
   }

@@ -222,7 +222,10 @@ class LoginController extends ChangeNotifier {
       notifyListeners();
     }, (r) {
       reqLupaPassword = RequestState.empty;
-      final time = r.expired.difference(DateTime.now());
+      final now = DateTime.now();
+      debugPrint(now.toString());
+      final time = r.expired.difference(now);
+      debugPrint(time.toString());
       expired = Duration(seconds: time.inSeconds);
 
       notifyListeners();

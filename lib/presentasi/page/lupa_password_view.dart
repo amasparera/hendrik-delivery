@@ -31,7 +31,7 @@ class LupaPassword extends StatelessWidget {
         children: [
           const SizedBox(height: 34),
           Image.asset(
-            "assets/image/Switch.png",
+            "assets/image/Hands Tiny Lock.png",
             height: 240,
           ),
           const SizedBox(height: padding),

@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
           title: "E-Kantin Delivery",
           debugShowCheckedModeBanner: false,
           home: home != null ? const HomeView() : const LoginView(),
+          locale: const Locale('id', 'ID'),
           theme: ThemeData.light().copyWith(
               primaryColor: purple,
               textTheme: GoogleFonts.interTextTheme(),

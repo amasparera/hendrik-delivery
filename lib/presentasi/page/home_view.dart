@@ -33,6 +33,9 @@ class _HomeViewState extends State<HomeView> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        // floatingActionButton: FloatingActionButton(onPressed: () {
+        //   LocalData().clear();
+        // }),
         body: SafeArea(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,10 +61,11 @@ class _HomeViewState extends State<HomeView> {
                           return c.reqProfile == RequestState.empty
                               ? CircleAvatar(
                                   backgroundColor: Colors.grey,
-                                  backgroundImage: c.imageError ||
-                                          c.userModel == null
-                                      ? null
-                                      : NetworkImage(c.userModel!.photoProfile),
+                                  backgroundImage:
+                                      c.imageError || c.userModel == null
+                                          ? null
+                                          : NetworkImage(
+                                              c.userModel!.photoProfile ?? ""),
                                   onBackgroundImageError:
                                       c.imageError || c.userModel == null
                                           ? null

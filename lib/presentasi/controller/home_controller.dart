@@ -41,7 +41,7 @@ class HomeController extends ChangeNotifier {
   void swithOnline(bool value, BuildContext context) async {
     online = value;
     notifyListeners();
-    final res = await _workImpl.setWork(value, "");
+    final res = await _workImpl.setWork(value);
     res.fold((l) {
       online = !online;
       notifyListeners();

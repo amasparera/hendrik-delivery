@@ -22,6 +22,9 @@ class _ProfileviewState extends State<Profileview> {
 
     return Scaffold(
       backgroundColor: bg,
+      // floatingActionButton: FloatingActionButton(onPressed: () {
+      //   print(co.userModel?.name);
+      // }),
       appBar: AppBar(
         elevation: 0,
         titleSpacing: 0,
@@ -70,7 +73,7 @@ class _ProfileviewState extends State<Profileview> {
                             backgroundColor: Colors.grey,
                             backgroundImage: c.imageError || c.userModel == null
                                 ? null
-                                : NetworkImage(c.userModel!.photoProfile),
+                                : NetworkImage(c.userModel!.photoProfile ?? ''),
                             onBackgroundImageError: c.imageError ||
                                     c.userModel == null
                                 ? null

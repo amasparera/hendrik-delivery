@@ -1,14 +1,21 @@
 class Working {
-  final String? canteen;
-  final String? status;
-  final String? name;
+  String? officeBoy;
+  String? workingStatus;
+  String? name;
 
-  Working({this.canteen, this.status, this.name});
+  Working({this.officeBoy, this.workingStatus, this.name});
 
-  factory Working.fromjson(Map<String, dynamic> json) {
-    return Working(
-        canteen: json["canteen"],
-        name: json["name"],
-        status: json["working_status"]);
+  Working.fromJson(Map<String, dynamic> json) {
+    officeBoy = json['office_boy'];
+    workingStatus = json['working_status'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['office_boy'] = officeBoy;
+    data['working_status'] = workingStatus;
+    data['name'] = name;
+    return data;
   }
 }

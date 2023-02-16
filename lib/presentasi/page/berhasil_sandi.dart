@@ -25,7 +25,7 @@ class BerhasilSandi extends StatelessWidget {
             ),
             FadeInDown(
                 duration: const Duration(milliseconds: 450),
-                child: Image.asset("assets/image/Switch_sukser.png")),
+                child: Image.asset("assets/image/Hands Unlocked.png")),
             FadeInDown(
               duration: const Duration(milliseconds: 450),
               child: const Padding(
