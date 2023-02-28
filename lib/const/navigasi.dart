@@ -5,8 +5,11 @@ toPage(BuildContext context, Widget page) {
   Navigator.of(context).push(MaterialPageRoute(builder: (context) => page));
 }
 
-toPageCupertino(BuildContext context, Widget page) {
-  Navigator.of(context).push(CupertinoPageRoute(builder: (context) => page));
+Future<bool?> toPageCupertino(BuildContext context, Widget page) async {
+  final value = await Navigator.of(context)
+      .push(CupertinoPageRoute(builder: (context) => page));
+
+  return value;
 }
 
 closePage(BuildContext context) {

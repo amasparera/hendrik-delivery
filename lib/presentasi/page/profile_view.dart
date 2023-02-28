@@ -18,8 +18,6 @@ class Profileview extends StatefulWidget {
 class _ProfileviewState extends State<Profileview> {
   @override
   Widget build(BuildContext context) {
-    final co = context.read<ProfileController>();
-
     return Scaffold(
       backgroundColor: bg,
       // floatingActionButton: FloatingActionButton(onPressed: () {
@@ -103,27 +101,35 @@ class _ProfileviewState extends State<Profileview> {
                     ),
                   ),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          co.userModel?.name ?? "",
-                          style: mainStyle,
-                        ),
-                        // Text(
-                        //   "Sentana",
-                        //   style:
-                        //       mainStyle.copyWith(fontWeight: FontWeight.normal),
-                        // ),
-                        Text(co.userModel?.phoneNumber ?? ''),
-                        Text(co.userModel?.email ?? '')
-                      ],
-                    ),
+                    child:
+                        Consumer<ProfileController>(builder: (context, c, _) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            c.userModel?.name ?? "",
+                            style: mainStyle,
+                          ),
+                          // Text(
+                          //   "Sentana",
+                          //   style:
+                          //       mainStyle.copyWith(fontWeight: FontWeight.normal),
+                          // ),
+                          Text(c.userModel?.phoneNumber ?? ''),
+                          Text(c.userModel?.email ?? '')
+                        ],
+                      );
+                    }),
                   ),
                   InkWell(
                     onTap: () {
-                      toPageCupertino(context, const EditProfile());
+                      toPageCupertino(context, const EditProfile())
+                          .then((value) async {
+                        if (value == true && value != null) {
+                          await context.read<ProfileController>().getProfile();
+                        }
+                      });
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(6),

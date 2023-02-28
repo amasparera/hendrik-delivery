@@ -100,7 +100,13 @@ class _EditProfileState extends State<EditProfile> {
                           : CircleAvatar(
                               backgroundColor: Colors.grey,
                               radius: 40,
-                              child: Image.asset(c.profile!.path),
+                              onBackgroundImageError: (exception, stackTrace) {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'gambar error : $exception dan $stackTrace')));
+                              },
+                              backgroundImage: Image.file(c.profile!).image,
+                              // child: Image.asset(c.profile!.path),
                             ));
                 }),
                 Positioned(

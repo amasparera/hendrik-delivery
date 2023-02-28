@@ -52,15 +52,15 @@ class ProfileController extends ChangeNotifier {
         ..hideCurrentSnackBar()
         ..showSnackBar(snackBar);
       notifyListeners();
-    }, (r) {
+    }, (r) async {
       reqProfile = RequestState.empty;
-      getProfile();
-      Navigator.of(context).pop();
+
+      Navigator.of(context).pop(true);
       notifyListeners();
     });
   }
 
-  void getProfile() async {
+  Future<void> getProfile() async {
     reqProfile = RequestState.loading;
 
     final res = await _profileImpl.getProfile();
