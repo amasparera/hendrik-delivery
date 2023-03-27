@@ -12,6 +12,8 @@ import 'const/dev_injetsion.dart' as dev;
 import 'presentasi/controller/login_controller.dart';
 import 'presentasi/controller/profile_controller.dart';
 
+// disini banyak yg baru
+
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
