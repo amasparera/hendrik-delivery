@@ -13,6 +13,7 @@ import 'presentasi/controller/login_controller.dart';
 import 'presentasi/controller/profile_controller.dart';
 
 // disini banyak yg baru
+// belajar rebase ok
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
