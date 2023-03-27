@@ -14,6 +14,7 @@ import 'presentasi/controller/profile_controller.dart';
 
 // disini banyak yg baru
 // belajar rebase ok
+// rebase gagal
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
