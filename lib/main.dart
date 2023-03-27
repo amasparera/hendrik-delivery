@@ -12,11 +12,15 @@ import 'const/dev_injetsion.dart' as dev;
 import 'presentasi/controller/login_controller.dart';
 import 'presentasi/controller/profile_controller.dart';
 
+<<<<<<< HEAD
 // fiture update teman
 // baru dari github
 // disini banyak yg baru
 // belajar rebase ok
 // galgal mulu
+=======
+// baru dari github
+>>>>>>> cb521900218f604fb134adc6709c7fb235705b71
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
